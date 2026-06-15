@@ -1,90 +1,126 @@
-#NormalizePath
+# Libft
 
-##Description
+## About
 
-Normalize Path is a programming exercise that focuses on implementing Unix-style path normalization.
+Libft is a custom C library developed as part of the 42 School curriculum. The purpose of this project is to recreate a selection of standard C library functions and implement additional utility functions that can be reused throughout future projects. This library serves as a foundational toolkit, helping to strengthen core programming concepts such as memory management, string manipulation, data structures, and low-level programming in C.
 
-Given a string representing a file system path, the goal is to convert it into its canonical form by removing redundant elements such as current directory references, parent directory references, and duplicated slashes.
+## Features
 
-This type of problem is common in file systems, web routing, and operating systems.
+### Standard C Library Functions
 
-## Normalization rules
+- Character checks: `ft_isalpha`, `ft_isdigit`, `ft_isalnum`, `ft_isascii`, `ft_isprint`
+- Character conversion: `ft_toupper`, `ft_tolower`
+- String manipulation: `ft_strlen`, `ft_strlcpy`, `ft_strlcat`, `ft_strchr`, `ft_strrchr`, `ft_strncmp`, `ft_strnstr`, `ft_strdup`
+- Memory management: `ft_memset`, `ft_bzero`, `ft_memcpy`, `ft_memmove`, `ft_memchr`, `ft_memcmp`, `ft_calloc`
+- Conversion functions: `ft_atoi`
 
-A path may contain:
+### Additional Functions
 
-- `.` → current directory (ignored)
-- `..` → parent directory (go one level up)
-- `/` → directory separator
-- multiple consecutive `/` → treated as a single separator
+- `ft_substr`
+- `ft_strjoin`
+- `ft_strtrim`
+- `ft_split`
+- `ft_itoa`
+- `ft_strmapi`
+- `ft_striteri`
+- `ft_putchar_fd`
+- `ft_putstr_fd`
+- `ft_putendl_fd`
+- `ft_putnbr_fd`
 
-## Examples
+### Bonus: Linked Lists
 
-### Example 1
+- `ft_lstnew`
+- `ft_lstadd_front`
+- `ft_lstsize`
+- `ft_lstlast`
+- `ft_lstadd_back`
+- `ft_lstdelone`
+- `ft_lstclear`
+- `ft_lstiter`
+- `ft_lstmap`
+
+## Project Structure
 
 ```text
-Input: /home//user/./docs
-Output: /home/user/docs
+libft/
+├── includes/
+│   └── libft.h
+├── src/
+│   ├── libc/
+│   ├── additional/
+│   └── bonus/
+├── Makefile
+└── README.md
 ```
 
-### Example 2
+## Compilation
 
-```text
-Input: /home/user/../docs
-Output: /home/docs
+Compile the mandatory part:
+
+```bash
+make
 ```
 
-### Example 3
+Compile the bonus functions:
 
-```text
-Input: /../
-Output: /
+```bash
+make bonus
 ```
 
-### Example 4
+Available Makefile rules:
 
-```text
-Input: /a/./b/../../c/
-Output: /c
+```bash
+make        # Compile mandatory functions
+make bonus  # Compile bonus functions
+make clean  # Remove object files
+make fclean # Remove object files and library
+make re     # Rebuild the project
 ```
 
-##Concepts covered
+The compilation generates the static library:
 
--Java programming
--String manipulation
-- Stack usage
-- Path parsing
-- Edge case handling
-- Algorithm design
-- Filesystem modeling
+```bash
+libft.a
+```
 
-##Solution strategy
+## Usage
 
-A typical approach:
+Include the header file in your source code:
 
-1. Split the path by `/`.
-2. Iterate through each segment:
-   - Ignore empty strings and `.`.
-   - If `..`, pop from stack if possible.
-   - Otherwise, push valid directory names.
-3. Rebuild the normalized path from the stack.
+```c
+#include "libft.h"
+```
 
-## Edge cases
+Compile your project with the library:
 
-- Multiple consecutive slashes (`///a//b`)
-- Going above root (`/../../`)
-- Empty or root-equivalent paths
-- Paths without leading slash
+```bash
+cc main.c libft.a -I includes
+```
 
-##Objective
+Example:
 
-The goal of this exercise is to practice:
+```c
+#include "libft.h"
+#include <stdio.h>
 
-- String parsing
-- Stack data structure usage
-- Edge case handling
-- Hierarchical data normalization
-- Robust algorithm design
+int main(void)
+{
+    printf("%d\n", ft_atoi("42"));
+    return (0);
+}
+```
 
-##Author
+## Learning Objectives
 
-Programming exercise implemented in Java as a practice of data structures and path manipulation.
+Through this project, I gained a deeper understanding of:
+
+- How standard C library functions work internally.
+- Dynamic memory allocation and management.
+- String and character manipulation.
+- Creating reusable and modular code.
+- Working with linked lists.
+- Building and maintaining static libraries.
+
+
+Developed as part of the 42 School curriculum.
