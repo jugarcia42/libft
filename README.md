@@ -1,103 +1,90 @@
-# Libft
+#NormalizePath
 
-## Descripción
+##Description
 
-Libft es el primer proyecto del currículo de 42. El objetivo es recrear una biblioteca de funciones básicas de la librería estándar de C, además de implementar funciones adicionales para trabajar con cadenas de caracteres, memoria y listas enlazadas.
+Normalize Path is a programming exercise that focuses on implementing Unix-style path normalization.
 
-Esta biblioteca servirá como base para futuros proyectos.
+Given a string representing a file system path, the goal is to convert it into its canonical form by removing redundant elements such as current directory references, parent directory references, and duplicated slashes.
 
-## Funciones implementadas
+This type of problem is common in file systems, web routing, and operating systems.
 
-### Funciones de la libc
+## Normalization rules
 
-- ft_isalpha
-- ft_isdigit
-- ft_isalnum
-- ft_isascii
-- ft_isprint
-- ft_strlen
-- ft_memset
-- ft_bzero
-- ft_memcpy
-- ft_memmove
-- ft_strlcpy
-- ft_strlcat
-- ft_toupper
-- ft_tolower
-- ft_strchr
-- ft_strrchr
-- ft_strncmp
-- ft_memchr
-- ft_memcmp
-- ft_strnstr
-- ft_atoi
-- ft_calloc
-- ft_strdup
+A path may contain:
 
-### Funciones adicionales
+- `.` → current directory (ignored)
+- `..` → parent directory (go one level up)
+- `/` → directory separator
+- multiple consecutive `/` → treated as a single separator
 
-- ft_substr
-- ft_strjoin
-- ft_strtrim
-- ft_split
-- ft_itoa
-- ft_strmapi
-- ft_striteri
-- ft_putchar_fd
-- ft_putstr_fd
-- ft_putendl_fd
-- ft_putnbr_fd
+## Examples
 
-### Funciones Bonus (listas enlazadas)
+### Example 1
 
-- ft_lstnew
-- ft_lstadd_front
-- ft_lstsize
-- ft_lstlast
-- ft_lstadd_back
-- ft_lstdelone
-- ft_lstclear
-- ft_lstiter
-- ft_lstmap
-
-## Compilación
-
-Para compilar la biblioteca:
-
-```bash
-make
+```text
+Input: /home//user/./docs
+Output: /home/user/docs
 ```
 
-Esto generará el archivo:
+### Example 2
 
-```bash
-libft.a
+```text
+Input: /home/user/../docs
+Output: /home/docs
 ```
 
-### Reglas disponibles
+### Example 3
 
-```bash
-make        # Compila la librería
-make bonus  # Compila las funciones bonus
-make clean  # Elimina archivos objeto
-make fclean # Elimina archivos objeto y la librería
-make re     # Recompila todo
+```text
+Input: /../
+Output: /
 ```
 
-## Uso
+### Example 4
 
-Incluye el header en tu proyecto:
-
-```c
-#include "libft.h"
+```text
+Input: /a/./b/../../c/
+Output: /c
 ```
 
-Y compila enlazando la biblioteca:
+##Concepts covered
 
-```bash
-cc main.c libft.a
-```
+-Java programming
+-String manipulation
+- Stack usage
+- Path parsing
+- Edge case handling
+- Algorithm design
+- Filesystem modeling
 
-## Autor
+##Solution strategy
 
-Proyecto realizado como parte del programa de formación de 42.
+A typical approach:
+
+1. Split the path by `/`.
+2. Iterate through each segment:
+   - Ignore empty strings and `.`.
+   - If `..`, pop from stack if possible.
+   - Otherwise, push valid directory names.
+3. Rebuild the normalized path from the stack.
+
+## Edge cases
+
+- Multiple consecutive slashes (`///a//b`)
+- Going above root (`/../../`)
+- Empty or root-equivalent paths
+- Paths without leading slash
+
+##Objective
+
+The goal of this exercise is to practice:
+
+- String parsing
+- Stack data structure usage
+- Edge case handling
+- Hierarchical data normalization
+- Robust algorithm design
+
+##Author
+
+Programming exercise implemented in Java as a practice of data structures and path manipulation.
